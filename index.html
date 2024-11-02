@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+    <title>Arisan Roullete</title>
+</head>
+<body>
+
+    <div id="app">
+        <div id="names" class="container animate__animated animate__fadeIn" v-if="state">
+            <div class="logo">
+                <h1>Who can get Arisan</h1>
+            </div>
+            <div class="input_container">
+                <input type="text" v-model.trim.lazy="inputName"/>
+                <button @click="addNameToList">Add</button>
+            </div>
+
+            <div 
+                class="error_label animate__animated animate__shakeX"
+                v-if="showError"
+            >
+                {{ error }}
+            </div>
+
+            <div class="list_of_names">
+                <div
+                    v-for="(name, index) in names"
+                    :key="name"
+                    @click="removeName(index)"
+                    class="animate__animated animate__fadeInUp"
+                >
+                    {{ name }}
+                </div>
+            </div>
+
+            <div v-if="isReady" class="animate__animated animate__pulse">
+                <div class="action_button" @click="showResult">
+                    Check The Winner
+                </div>
+            </div>
+        </div>
+
+        <div id="result" class="container animate__animated animate__fadeIn" v-if="!state">
+            <div class="result_container">
+                <h1>
+                    The Winner Is: 
+                </h1>
+                <div class="result_value">
+                    {{ result }}
+                </div>
+
+                <div class="action_button" @click="resetApp">
+                    Start Over
+                </div>
+                <br>
+                <div class="action_button btn2" @click="getNewResult">
+                    Change the winner
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script src="script/app.js"></script>
+</html>
